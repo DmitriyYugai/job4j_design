@@ -10,12 +10,12 @@
     <version>1.0</version>
   </parent>
 
-  <artifactId>job4j_design_chapter_001</artifactId>
+  <artifactId>job4j_design_chapter_005</artifactId>
 
   <packaging>jar</packaging>
 
-  <name>job4j_design_chapter_001</name>
-  <description>Child project job4j_design_chapter_001 - Data structures and algorithms</description>
+  <name>job4j_design_chapter_005</name>
+  <description>Child project job4j_design_chapter_005 - TDD</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
