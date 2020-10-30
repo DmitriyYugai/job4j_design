@@ -24,6 +24,11 @@ public class SimpleArray<T> implements Iterable<T> {
 
     public void add(T model) {
         modCount++;
+        if (size >= array.length) {
+            Object[] old = array;
+            array = new Object[old.length * 2];
+            System.arraycopy(old, 0, array, 0, size);
+        }
         array[size++] = model;
     }
 
