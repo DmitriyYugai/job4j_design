@@ -18,11 +18,12 @@ public class UserStoreTest {
         assertThat(rsl, is(expected));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void whenFindByIdThenException() {
         UserStore store = new UserStore();
         store.add(new User("qwe"));
         User rsl = store.findById("asd");
+        assertNull(rsl);
     }
 
     @Test
@@ -49,13 +50,13 @@ public class UserStoreTest {
         assertThat(rsl2, is(expected));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void whenDeleteThenOk() {
         UserStore store = new UserStore();
         store.add(new User("qwe"));
         store.add(new User("asd"));
         store.delete("asd");
-        User rsl2 = store.findById("asd");
+        assertNull(store.findById("asd"));
     }
 
     @Test
