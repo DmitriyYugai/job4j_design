@@ -11,7 +11,7 @@ public class SimpleArrayTest {
 
     @Test
     public void whenAddThenOk() {
-        SimpleArray<Integer> array = new SimpleArray<>(Integer.class, 2);
+        SimpleArray<Integer> array = new SimpleArray<>(2);
         array.add(1);
         array.add(2);
         assertThat(array.get(0), is(1));
@@ -20,7 +20,7 @@ public class SimpleArrayTest {
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void whenAddThenException() {
-        SimpleArray<Integer> array = new SimpleArray<>(Integer.class, 2);
+        SimpleArray<Integer> array = new SimpleArray<>(2);
         array.add(1);
         array.add(2);
         array.add(3);
@@ -28,13 +28,13 @@ public class SimpleArrayTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void whenGetThenException() {
-        SimpleArray<Animal> array = new SimpleArray<>(Animal.class, 2);
+        SimpleArray<Animal> array = new SimpleArray<>(2);
         array.get(2);
     }
 
     @Test
     public void wnehSetThenOk() {
-        SimpleArray<Character> array = new SimpleArray<>(Character.class, 2);
+        SimpleArray<Character> array = new SimpleArray<>(2);
         array.add('r');
         array.add('s');
         array.set(1, 'k');
@@ -43,7 +43,7 @@ public class SimpleArrayTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void wnehSetThenException() {
-        SimpleArray<Character> array = new SimpleArray<>(Character.class, 2);
+        SimpleArray<Character> array = new SimpleArray<>(2);
         array.add('r');
         array.add('s');
         array.set(4, 'k');
@@ -51,19 +51,21 @@ public class SimpleArrayTest {
 
     @Test
     public void whenRemoveThenOk() {
-        SimpleArray<Integer> array = new SimpleArray<>(Integer.class, 4);
+        SimpleArray<Integer> array = new SimpleArray<>(3);
         array.add(1);
         array.add(2);
         array.add(3);
-        array.add(4);
         array.remove(1);
-        Integer[] expected = {1, 3, 4};
-        assertThat(array.getArray(), is(expected));
+        Iterator<Integer> it = array.iterator();
+        int rsl1 = it.next();
+        int rsl2 = it.next();
+        assertEquals(rsl1, 1);
+        assertEquals(rsl2, 3);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void whenRemoveThenException() {
-        SimpleArray<Integer> array = new SimpleArray<>(Integer.class, 2);
+        SimpleArray<Integer> array = new SimpleArray<>(2);
         array.add(1);
         array.add(2);
         array.remove(2);
@@ -71,7 +73,7 @@ public class SimpleArrayTest {
 
     @Test
     public void whenIteratorHasNextThenOk() {
-        SimpleArray<Integer> array = new SimpleArray<>(Integer.class, 2);
+        SimpleArray<Integer> array = new SimpleArray<>(2);
         array.add(1);
         array.add(2);
         Iterator<Integer> it = array.iterator();
@@ -81,7 +83,7 @@ public class SimpleArrayTest {
 
     @Test
     public void whenIteratorNextThenOk() {
-        SimpleArray<Integer> array = new SimpleArray<>(Integer.class, 2);
+        SimpleArray<Integer> array = new SimpleArray<>(2);
         array.add(1);
         array.add(2);
         Iterator<Integer> it = array.iterator();
@@ -91,7 +93,7 @@ public class SimpleArrayTest {
 
     @Test
     public void whenIteratorThenOk() {
-        SimpleArray<Integer> array = new SimpleArray<>(Integer.class, 2);
+        SimpleArray<Integer> array = new SimpleArray<>(2);
         array.add(1);
         array.add(2);
         Iterator<Integer> it = array.iterator();

@@ -6,17 +6,11 @@ import java.util.Iterator;
 import java.util.Objects;
 
 public class SimpleArray<T> implements Iterable<T> {
-    private Class<T> type;
-    private T[] array;
+    private Object[] array;
     private int pointer = 0;
 
-    public SimpleArray(Class<T> type, int size) {
-        this.type = type;
-        array = (T[]) Array.newInstance(type, size);
-    }
-
-    public T[] getArray() {
-        return Arrays.copyOf(array, pointer);
+    public SimpleArray(int size) {
+        array = new Object[size];
     }
 
     public void add(T model) {
@@ -24,7 +18,7 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public T get(int index) {
-        return array[Objects.checkIndex(index, pointer)];
+        return (T) array[Objects.checkIndex(index, pointer)];
     }
 
     public void set(int index, T model) {
@@ -49,13 +43,9 @@ public class SimpleArray<T> implements Iterable<T> {
 
             @Override
             public T next() {
-                return array[index++];
+                return (T) array[index++];
             }
 
-            @Override
-            public void remove() {
-                throw new UnsupportedOperationException();
-            }
         };
     }
 
