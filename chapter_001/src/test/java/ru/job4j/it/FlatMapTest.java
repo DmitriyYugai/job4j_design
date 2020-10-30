@@ -55,7 +55,7 @@ public class FlatMapTest {
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void whenInnerEmpty() {
+    public void whenEmpty() {
         Iterator<Iterator<Object>> data = List.of(
                 List.of().iterator()
         ).iterator();
@@ -63,10 +63,13 @@ public class FlatMapTest {
         flat.next();
     }
 
-    @Test(expected = NoSuchElementException.class)
-    public void whenOuterEmpty() {
-        Iterator<Iterator<Object>> data = List.<Iterator<Object>>of().iterator();
+    @Test
+    public void whenTwoEmpty()  {
+        Iterator<Iterator<Object>> data = List.of(
+                List.of().iterator(), List.of().iterator()
+        ).iterator();
         FlatMap<Object> flat = new FlatMap<>(data);
+        assertFalse(flat.hasNext());
     }
 
 }

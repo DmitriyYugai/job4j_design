@@ -10,24 +10,30 @@ public class FlatMap<T> implements Iterator<T> {
 
     public FlatMap(Iterator<Iterator<T>> data) {
         this.data = data;
-        cursor = data.next();
+        while (data.hasNext()) {
+            cursor = data.next();
+            if (cursor.hasNext()) {
+                break;
+            }
+        }
     }
 
     @Override
     public boolean hasNext() {
-        return data.hasNext() || cursor.hasNext();
+        return cursor.hasNext();
     }
 
     @Override
     public T next() {
-        if (!hasNext()) {
-            throw new NoSuchElementException();
+        while (true) {
+            if (!hasNext() && !data.hasNext()) {
+                throw new NoSuchElementException();
+            }
+            if (hasNext()) {
+                return cursor.next();
+            }
+            cursor = data.next();
         }
-        while (cursor.hasNext()) {
-            return cursor.next();
-        }
-        cursor = data.next();
-        return next();
     }
 
     public static void main(String[] args) {
