@@ -12,6 +12,9 @@ public class SimpleQueue<T> {
             out.push(el);
         }
         T rsl =  out.pop();
+        for (T el = out.pop(); el != null; el = out.pop()) {
+            in.push(el);
+        }
         if (rsl == null) {
             throw new NoSuchElementException();
         }
@@ -19,9 +22,6 @@ public class SimpleQueue<T> {
     }
 
     public void push(T value) {
-        for (T el = out.pop(); el != null; el = out.pop()) {
-            in.push(el);
-        }
         in.push(value);
     }
 
