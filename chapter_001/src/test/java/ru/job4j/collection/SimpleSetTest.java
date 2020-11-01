@@ -8,7 +8,6 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 public class SimpleSetTest {
-
     @Test
     public void whenAdd() {
         SimpleSet<Integer> set = new SimpleSet<>();
