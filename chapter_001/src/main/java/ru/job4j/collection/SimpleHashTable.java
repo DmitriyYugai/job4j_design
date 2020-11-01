@@ -31,7 +31,7 @@ public class SimpleHashTable<K, V> implements Iterable<K> {
             return false;
         }
         if (size >= array.length) {
-            System.arraycopy(array, 0, array, 0, size * 2);
+            System.arraycopy(array, 0, array, 0, array.length * 2);
         }
         size++;
         array[index] = new MapEntry<>(key, value);
