@@ -24,7 +24,11 @@
     <!--   <property name="fileExtensions" value="java"/> -->
     <!-- </module> -->
 
+    <module name="SuppressWarningsFilter" />
+
     <module name="TreeWalker">
+
+        <module name="SuppressWarningsHolder" />
 
         <module name="DeclarationOrder"/>
 
