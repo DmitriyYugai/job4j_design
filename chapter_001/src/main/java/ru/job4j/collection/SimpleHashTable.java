@@ -78,9 +78,6 @@ public class SimpleHashTable<K, V> implements Iterable<K> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                if (expectedModCount != modCount) {
-                    throw new ConcurrentModificationException();
-                }
                 for (int i = currentIndex + 1; i < array.length; i++) {
                     if (array[i] != null) {
                         index++;
