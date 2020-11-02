@@ -25,7 +25,7 @@ public class Tree<E> implements SimpleTree<E> {
                 return false;
             }
         }
-        listNodes.add(new Node<E>(child));
+        listNodes.add(new Node<>(child));
         return true;
     }
 
@@ -41,6 +41,23 @@ public class Tree<E> implements SimpleTree<E> {
                 break;
             }
             data.addAll(el.children);
+        }
+        return rsl;
+    }
+
+    @Override
+    public boolean isBinary() {
+        return resursive(root);
+    }
+
+    private boolean resursive(Node<E> node) {
+        boolean rsl = true;
+        List<Node<E>> listNodes = node.children;
+        if (listNodes.size() > 2) {
+            return false;
+        }
+        for (Node<E> n : listNodes) {
+            rsl = resursive(n);
         }
         return rsl;
     }

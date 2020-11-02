@@ -9,6 +9,8 @@ public interface SimpleTree<E> {
 
     Optional<Node<E>> findBy(E value);
 
+    boolean isBinary();
+
     class Node<E> {
         @SuppressWarnings("checkstyle:VisibilityModifier")
         public final E value;
@@ -18,5 +20,6 @@ public interface SimpleTree<E> {
         public Node(E value) {
             this.value = value;
         }
+
     }
 }
