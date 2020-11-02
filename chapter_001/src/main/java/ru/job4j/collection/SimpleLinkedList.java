@@ -35,15 +35,18 @@ public class SimpleLinkedList<E> implements Iterable<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<>() {
-            private int index;
             private long expectedModCount = modCount;
+            private Node<E> node = first;
 
             @Override
             public boolean hasNext() {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return index < size;
+                if (node == null) {
+                    return false;
+                }
+                return node.index < size;
             }
 
             @Override
@@ -54,7 +57,9 @@ public class SimpleLinkedList<E> implements Iterable<E> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return get(index++);
+                E rsl = node.value;
+                node =  node.next;
+                return rsl;
             }
 
         };
