@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Queue;
+import java.util.function.Predicate;
 
 public class Tree<E> implements SimpleTree<E> {
     private final Node<E> root;
@@ -14,18 +15,13 @@ public class Tree<E> implements SimpleTree<E> {
 
     @Override
     public boolean add(E parent, E child) {
-        boolean rsl = false;
         Optional<Node<E>> node = findBy(parent);
-        if (!node.isPresent()) {
+        Node<E> newNode = new Node<>(child);
+        if (!node.isPresent() || !resursive(root, list -> list.contains(newNode))) {
             return false;
         }
         List<Node<E>> listNodes = node.get().children;
-        for (Node<E> n : listNodes) {
-            if (n.value.equals(child)) {
-                return false;
-            }
-        }
-        listNodes.add(new Node<>(child));
+        listNodes.add(newNode);
         return true;
     }
 
@@ -47,17 +43,17 @@ public class Tree<E> implements SimpleTree<E> {
 
     @Override
     public boolean isBinary() {
-        return resursive(root);
+        return resursive(root, list -> list.size() > 2);
     }
 
-    private boolean resursive(Node<E> node) {
+    private boolean resursive(Node<E> node, Predicate<List<Node<E>>> predicate) {
         boolean rsl = true;
         List<Node<E>> listNodes = node.children;
-        if (listNodes.size() > 2) {
+        if (predicate.test(listNodes)) {
             return false;
         }
         for (Node<E> n : listNodes) {
-            rsl = resursive(n);
+            rsl = resursive(n, list -> list.size() > 2);
         }
         return rsl;
     }
