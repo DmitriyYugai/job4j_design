@@ -8,6 +8,7 @@ public class SimpleHashTable<K, V> implements Iterable<K> {
     private MapEntry<K, V>[] array;
     private long modCount;
     private int size;
+    private double loadFactor = 0.75;
 
     public SimpleHashTable() {
         array = (MapEntry<K, V>[]) new MapEntry[10];
@@ -15,6 +16,13 @@ public class SimpleHashTable<K, V> implements Iterable<K> {
 
     public SimpleHashTable(int sz) {
         array = (MapEntry<K, V>[]) new MapEntry[sz];
+    }
+
+    public SimpleHashTable(int sz, double loadFactor) {
+        array = (MapEntry<K, V>[]) new MapEntry[sz];
+        if (loadFactor < 1 && loadFactor > 0) {
+            this.loadFactor = loadFactor;
+        }
     }
 
     public V get(K key) {
@@ -30,7 +38,7 @@ public class SimpleHashTable<K, V> implements Iterable<K> {
         if (array[index] != null) {
             return false;
         }
-        if (size >= array.length) {
+        if (Math.round(size / array.length) >= loadFactor) {
             MapEntry<K, V>[] tmp = array;
             int newSize = size * 2;
             array = (MapEntry<K, V>[]) new MapEntry[newSize];
