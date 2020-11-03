@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
-import java.util.stream.Collectors;
 
 public class Config {
     private final String path;
@@ -44,7 +43,7 @@ public class Config {
     }
 
     public static void main(String[] args) {
-//        System.out.println(new Config("app.properties"));
+        System.out.println(new Config("app.properties"));
         System.out.println(new Config("chapter_002/data/pair_without_comment.properties"));
         System.out.println("---------------------");
         System.out.println(new Config("chapter_002/data/pair_with_comment.properties"));
