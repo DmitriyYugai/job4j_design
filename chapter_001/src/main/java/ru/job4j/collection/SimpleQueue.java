@@ -16,11 +16,7 @@ public class SimpleQueue<T> {
                 out.push(in.pop());
             }
         }
-        T rsl = out.pop();
-        if (rsl == null) {
-            throw new NoSuchElementException();
-        }
-        return rsl;
+        return out.pop();
     }
 
     public void push(T value) {
