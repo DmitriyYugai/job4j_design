@@ -13,7 +13,7 @@ public class SimpleLinkedList<E> implements Iterable<E> {
 
     public void add(E value) {
         final Node<E> l = last;
-        final Node<E> newNode = new Node<>(l, size, value, null);
+        final Node<E> newNode = new Node<>(l, value, null);
         last = newNode;
         if (l == null) {
             first = newNode;
@@ -25,9 +25,11 @@ public class SimpleLinkedList<E> implements Iterable<E> {
     }
 
     public E get(int index) {
+        int i = 0;
         Node<E> start = first;
-        while (Objects.checkIndex(index, size) != start.index) {
+        while (Objects.checkIndex(index, size) != i) {
             start = start.next;
+            i++;
         }
         return start.value;
     }
@@ -46,16 +48,13 @@ public class SimpleLinkedList<E> implements Iterable<E> {
                 if (node == null) {
                     return false;
                 }
-                return node.index < size;
+                return node != null;
             }
 
             @Override
             public E next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
-                }
-                if (expectedModCount != modCount) {
-                    throw new ConcurrentModificationException();
                 }
                 E rsl = node.value;
                 node =  node.next;
@@ -66,13 +65,11 @@ public class SimpleLinkedList<E> implements Iterable<E> {
     }
 
     private static class Node<E> {
-        private int index;
         private E value;
         private Node<E> prev;
         private Node<E> next;
 
-        public Node(Node<E> prev, int index, E value, Node<E> next) {
-            this.index = index;
+        public Node(Node<E> prev, E value, Node<E> next) {
             this.value = value;
             this.prev = prev;
             this.next = next;
