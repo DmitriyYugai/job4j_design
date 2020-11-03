@@ -1,38 +1,26 @@
 package ru.job4j.collection;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Analize {
 
     public Info diff(List<User> previous, List<User> current) {
+        List<User> delPrev = new ArrayList<>(previous);
+        List<User> addCur = new ArrayList<>(current);
+        List<User> changePrev = new ArrayList<>(previous);
+        List<User> changeCur = new ArrayList<>(current);
+        Set<User> set = new HashSet<>();
         Info info = new Info();
-        int remains = 0;
-        for (User userPrev : previous) {
-            int index = findById(userPrev.id, current);
-            if (index == -1) {
-                info.deleted++;
-                continue;
-            }
-            remains++;
-            User userCur = current.get(index);
-            if (!userCur.name.equals(userPrev.name)) {
-                info.changed++;
-            }
-        }
-        info.added = current.size() - remains;
+        delPrev.removeAll(current);
+        info.deleted = delPrev.size();
+        addCur.removeAll(previous);
+        info.added = addCur.size();
+        changePrev.retainAll(current);
+        changeCur.retainAll(previous);
+        set.addAll(changePrev);
+        set.addAll(changeCur);
+        info.changed = set.size() - changePrev.size();
         return info;
-    }
-
-    private int findById(int id, List<User> list) {
-        int rsl = -1;
-        for (int index = 0; index < list.size(); index++) {
-            if (list.get(index).id == id) {
-                rsl = index;
-                break;
-            }
-        }
-        return rsl;
     }
 
     public static class User {
@@ -42,6 +30,23 @@ public class Analize {
         public User(int id, String name) {
             this.id = id;
             this.name = name;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            User user = (User) o;
+            return id == user.id;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(id, name);
         }
     }
 
