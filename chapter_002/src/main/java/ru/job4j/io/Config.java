@@ -17,7 +17,7 @@ public class Config {
     public void load() {
         try (BufferedReader in = new BufferedReader(new FileReader(path))) {
             in.lines()
-                    .filter(line -> line.length() != 0 && !line.startsWith("//"))
+                    .filter(line -> line.length() != 0 && !line.startsWith("#"))
                     .forEach(line -> {
                         String[] keyValue = line.split("=");
                         values.put(keyValue[0], keyValue[1]);
