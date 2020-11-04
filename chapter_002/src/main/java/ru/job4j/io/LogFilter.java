@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 public class LogFilter {
     public static List<String> filter(String file) {
         List<String> rsl = List.of();
-        try (BufferedReader in = new BufferedReader(new FileReader("log.txt"))) {
+        try (BufferedReader in = new BufferedReader(new FileReader(file))) {
             rsl = in.lines()
                     .filter(line -> {
                         String[] strings = line.split(" ");
