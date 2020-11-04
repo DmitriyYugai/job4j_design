@@ -2,27 +2,36 @@ package ru.job4j.io;
 
 import java.io.*;
 import java.nio.Buffer;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Analizy {
+
     public void unavailable(String source, String target) {
-        try (BufferedReader in = new BufferedReader(new FileReader(source));
-             PrintWriter out = new PrintWriter(
-                     new BufferedWriter(
-                             new FileWriter(target)))) {
-            String[] lines = in.lines().toArray(String[]::new);
+        List<String> list = new ArrayList<>();
+        try (BufferedReader in = new BufferedReader(new FileReader(source))) {
+            String line;
             boolean errorFLag = false;
-            for (String line : lines) {
+            while ((line = in.readLine()) != null) {
                 String code = line.split(" ")[0];
                 String date = line.split(" ")[1];
                 if ((code.equals("400") || code.equals("500")) && !errorFLag) {
                     errorFLag = true;
-                    out.write(date + ";");
-                    continue;
+                    list.add(date + ";");
                 }
                 if ((code.equals("200") || code.equals("300")) && errorFLag) {
                     errorFLag = false;
-                    out.write(date + System.lineSeparator());
+                    list.add(date + System.lineSeparator());
                 }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try (PrintWriter out = new PrintWriter(
+                new BufferedWriter(
+                        new FileWriter(target)))) {
+            for (String s : list) {
+                out.write(s);
             }
         } catch (Exception e) {
             e.printStackTrace();
