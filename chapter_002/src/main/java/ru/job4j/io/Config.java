@@ -20,7 +20,9 @@ public class Config {
                     .filter(line -> line.length() != 0 && !line.startsWith("#"))
                     .forEach(line -> {
                         String[] keyValue = line.split("=");
-                        values.put(keyValue[0], keyValue[1]);
+                        if (keyValue.length == 2) {
+                            values.put(keyValue[0], keyValue[1]);
+                        }
                     });
         } catch (Exception e) {
             e.printStackTrace();
