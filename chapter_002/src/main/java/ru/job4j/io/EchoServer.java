@@ -26,11 +26,20 @@ public class EchoServer {
                         String params = firstStr.split("/")[1];
                         int end = params.indexOf(" ");
                         params = params.substring(1, end);
-                        if (params.split("=")[1].equals("Bye")) {
+                        String value = params.split("=")[1];
+                        if (value.equals("Exit")) {
                             break;
+                        } else if (value.equals("Hello")) {
+                            out.write("HTTP/1.1 200 OK\r\n".getBytes());
+                            out.write("Hello, friend\r\n".getBytes());
+                            continue;
+                        } else {
+                            out.write("HTTP/1.1 200 OK\r\n".getBytes());
+                            out.write((value + "\r\n").getBytes());
+                            continue;
                         }
                     }
-                    out.write("HTTP/1.1 200 OK\r\n\\".getBytes());
+                    out.write("HTTP/1.1 200 OK\r\n".getBytes());
                 }
             }
         }
