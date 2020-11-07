@@ -1,8 +1,7 @@
-package ru.job4j.io;
+package ru.job4j.io.zip;
 
 import java.io.*;
 import java.nio.file.*;
-import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class Zip {

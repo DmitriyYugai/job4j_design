@@ -1,4 +1,4 @@
-package ru.job4j.io;
+package ru.job4j.io.zip;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
