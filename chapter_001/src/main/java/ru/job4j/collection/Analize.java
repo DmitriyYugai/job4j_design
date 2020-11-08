@@ -5,21 +5,21 @@ import java.util.*;
 public class Analize {
 
     public Info diff(List<User> previous, List<User> current) {
-        List<User> delPrev = new ArrayList<>(previous);
-        List<User> addCur = new ArrayList<>(current);
-        List<User> changePrev = new ArrayList<>(previous);
-        List<User> changeCur = new ArrayList<>(current);
-        Set<User> set = new HashSet<>();
+        Map<User, User> map = new HashMap<>();
+        for (User user : previous) {
+            map.put(user, user);
+        }
         Info info = new Info();
-        delPrev.removeAll(current);
-        info.deleted = delPrev.size();
-        addCur.removeAll(previous);
-        info.added = addCur.size();
-        changePrev.retainAll(current);
-        changeCur.retainAll(previous);
-        set.addAll(changePrev);
-        set.addAll(changeCur);
-        info.changed = set.size() - changePrev.size();
+        for (User user : current) {
+            if (!map.containsKey(user)) {
+                info.added++;
+                continue;
+            }
+            if (user.name.hashCode() != map.get(user).name.hashCode()) {
+                info.changed++;
+            }
+        }
+        info.deleted = previous.size() - (current.size() - info.added);
         return info;
     }
 
@@ -46,7 +46,7 @@ public class Analize {
 
         @Override
         public int hashCode() {
-            return Objects.hash(id, name);
+            return Objects.hash(id);
         }
     }
 
