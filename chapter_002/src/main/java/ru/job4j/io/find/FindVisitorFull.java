@@ -4,19 +4,20 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class FindVisitorFull extends SimpleFileVisitor<Path> {
     private List<String> paths;
-    private String fileName;
+    private Predicate<Path> pred;
 
-    public FindVisitorFull(List<String> paths, String fileName) {
+    public FindVisitorFull(List<String> paths, Predicate<Path> pred) {
         this.paths = paths;
-        this.fileName = fileName;
+        this.pred = pred;
     }
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        if (file.getFileName().toString().equals(fileName)) {
+        if (pred.test(file)) {
             paths.add(file.toAbsolutePath().toString());
         }
         return FileVisitResult.CONTINUE;

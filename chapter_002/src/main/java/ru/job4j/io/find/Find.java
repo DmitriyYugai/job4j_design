@@ -1,9 +1,7 @@
 package ru.job4j.io.find;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +16,16 @@ public class Find {
 
     private void findAndPack(Path directory, String fileName, int mode) throws IOException {
         if (mode == 0) {
-            Files.walkFileTree(directory, new FindVisitorFull(rsl, fileName));
+            Files.walkFileTree(directory, new FindVisitorFull(
+                    rsl, file -> file.getFileName().toString().equals(fileName)));
         } else if (mode == 1) {
-            Files.walkFileTree(directory, new FindVisitorMask(rsl, fileName));
+            PathMatcher matcherMask = FileSystems.getDefault().getPathMatcher("glob:**" + fileName);
+            Files.walkFileTree(directory, new FindVisitorFull(
+                    rsl, matcherMask::matches));
         } else {
-            Files.walkFileTree(directory, new FindVisitorRegex(rsl, fileName));
+            PathMatcher matcherReg = FileSystems.getDefault().getPathMatcher("regex:" + fileName);
+            Files.walkFileTree(directory, new FindVisitorFull(
+                    rsl, matcherReg::matches));
         }
     }
 
