@@ -57,17 +57,25 @@ inner join engines as e on c.engine_id = e.id
 inner join transmissions as t on c.trans_id = t.id;
 
 --2. Вывести отдельно детали, которые не используются в машине, кузова, двигатели, коробки передач.
-select c.name as car, b.name as body
-from cars as c
-inner join bodies as b on c.body_id != b.id;
 
-select c.name as car, e.name as engine
+--Неиспользуемые кузова
+select b.name as not_used_bodies
 from cars as c
-inner join engines as e on c.trans_id != e.id;
+right join bodies as b on c.body_id = b.id
+where c.name is null;
 
-select c.name as car, t.name as transmission
+--Неиспользуемые двигатели
+select e.name as not_used_engines
 from cars as c
-inner join transmissions as t on c.trans_id != t.id;
+right join engines as e on c.engine_id = e.id
+where c.name is null;
+
+--Неиспользуемые трансмиссии
+select t.name as not_used_transmissions
+from cars as c
+right join transmissions as t on c.trans_id = t.id
+where c.name is null;
+
 
 
 
