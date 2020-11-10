@@ -5,17 +5,17 @@ import java.util.*;
 public class Analize {
 
     public Info diff(List<User> previous, List<User> current) {
-        Map<User, User> map = new HashMap<>();
+        Map<Integer, User> map = new HashMap<>();
         for (User user : previous) {
-            map.put(user, user);
+            map.put(user.id, user);
         }
         Info info = new Info();
         for (User user : current) {
-            if (!map.containsKey(user)) {
+            if (!map.containsKey(user.id)) {
                 info.added++;
                 continue;
             }
-            if (user.name.hashCode() != map.get(user).name.hashCode()) {
+            if (!user.equals(map.get(user.id))) {
                 info.changed++;
             }
         }
@@ -41,12 +41,13 @@ public class Analize {
                 return false;
             }
             User user = (User) o;
-            return id == user.id;
+            return id == user.id
+                    && Objects.equals(name, user.name);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(id);
+            return Objects.hash(id, name);
         }
     }
 
