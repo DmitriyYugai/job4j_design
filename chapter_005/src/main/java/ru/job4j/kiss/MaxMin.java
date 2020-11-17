@@ -6,7 +6,16 @@ import java.util.Comparator;
 import java.util.List;
 
 public class MaxMin {
-    public <T> T maxMin(List<T> value, Comparator<T> comparator) {
+
+    public <T> T max(List<T> value, Comparator<T> comparator) {
+        return maxMin(value, comparator);
+    }
+
+    public <T> T min(List<T> value, Comparator<T> comparator) {
+        return maxMin(value, Collections.reverseOrder(comparator));
+    }
+
+    private <T> T maxMin(List<T> value, Comparator<T> comparator) {
         List<T> copy = new ArrayList<>(value);
         for (int index = 0; index < copy.size() - 1; index++) {
             T current = copy.get(index);
@@ -22,10 +31,10 @@ public class MaxMin {
     public static void main(String[] args) {
         MaxMin maxMin = new MaxMin();
         System.out.println(
-                maxMin.maxMin(List.of(4, 2, 6, 8, 1, 4, 14, 6, 1),
-                        Integer::compareTo));
+                maxMin.max(List.of(4, 2, 6, 8, 1, 4, 14, 6, 1),
+                        Comparator.naturalOrder()));
         System.out.println(
-                maxMin.maxMin(List.of(4, 2, 6, 8, 1, 4, 14, 6, 1),
-                        Collections.reverseOrder(Integer::compareTo)));
+                maxMin.min(List.of(4, 2, 6, 8, 1, 4, 14, 6, 1),
+                        Comparator.naturalOrder()));
     }
 }
