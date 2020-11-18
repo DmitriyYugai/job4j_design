@@ -22,15 +22,17 @@ public class SimpleCache {
 
     public List<String> get(String key) throws IOException {
         SoftReference<List<String>> softRef = cache.get(key);
+        List<String> fileContent;
         if (softRef == null || softRef.get() == null) {
             try (BufferedReader br = new BufferedReader(
                     new FileReader("chapter_004/src/forCache/" + key))) {
-                List<String> fileContent = new ArrayList<>();
+                fileContent = new ArrayList<>();
                 String line;
                 while ((line = br.readLine()) != null) {
                     fileContent.add(line);
                 }
                 softRef = new SoftReference<>(fileContent);
+                cache.put(key, softRef);
             }
         }
         return softRef.get();
