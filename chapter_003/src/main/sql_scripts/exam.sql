@@ -37,27 +37,25 @@ insert into person(id, name, company_id) values(9, 'Andrei', 3);
 
 --1) Retrieve in a single query:
 -- - names of all persons that are NOT in the company with id = 5
-select name 
-from person
-where company_id != 5;
-
 -- - company name for each person
 select p.name, c.name
-from person as p
+from (
+    select name
+    from person
+    where company_id != 5
+) as p
 left join company as c 
 on p.company_id = c.id;
 
 --2) Select the name of the company with the maximum number of persons + number of persons in this company
-select *
-from (
-	select c.name, count(p.name)
-	from company as c
-	left join person as p 
-	on p.company_id = c.id
-	group by c.name
-	order by count(p.name) desc
-) as t
-limit 1
+
+select c.name, count(p.name)
+from company as c
+left join person as p
+on p.company_id = c.id
+group by c.name
+order by count(p.name) desc
+limit 1;
 
 
 
