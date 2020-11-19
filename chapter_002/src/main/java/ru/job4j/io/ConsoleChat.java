@@ -1,10 +1,8 @@
 package ru.job4j.io;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
+import java.util.function.Predicate;
 
 public class ConsoleChat {
     private static final String OUT = "закончить";
@@ -15,10 +13,13 @@ public class ConsoleChat {
     private final Random rand = new Random();
     private List<String> botList = new ArrayList<>();
     private List<String> logList = new ArrayList<>();
+    private Map<String, Predicate<Boolean>> dispatch = new HashMap<>();
 
     public ConsoleChat(String path, String botAnswers) {
         this.path = path;
         this.botAnswers = botAnswers;
+        dispatch.put(STOP, b -> true);
+        dispatch.put(CONTINUE, b -> false);
     }
 
     @SuppressWarnings("checkstyle:InnerAssignment")
@@ -29,13 +30,14 @@ public class ConsoleChat {
         String input = null;
         while (!(input = scanner.nextLine()).equals(OUT)) {
             logList.add("Пользователь: " + input);
-            if (input.equals(STOP)) {
-                stopFlag = true;
-                continue;
-            }
-            if (input.equals(CONTINUE)) {
-                stopFlag = false;
-            }
+            stopFlag = getDispatch(input, stopFlag);
+//            if (input.equals(STOP)) {
+//                stopFlag = true;
+//                continue;
+//            }
+//            if (input.equals(CONTINUE)) {
+//                stopFlag = false;
+//            }
             if (!stopFlag) {
                 String answer = getBotAnswer();
                 logList.add("Бот: " + answer);
@@ -76,6 +78,10 @@ public class ConsoleChat {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean getDispatch(String input, boolean stopFlag) {
+        return dispatch.getOrDefault(input, flag -> flag).test(stopFlag);
     }
 
     public static void main(String[] args) {
