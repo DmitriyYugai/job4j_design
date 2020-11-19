@@ -16,16 +16,14 @@ public class MaxMin {
     }
 
     private <T> T maxMin(List<T> value, Comparator<T> comparator) {
-        List<T> copy = new ArrayList<>(value);
-        for (int index = 0; index < copy.size() - 1; index++) {
-            T current = copy.get(index);
-            T next = copy.get(index + 1);
-            if (comparator.compare(current, next) > 0) {
-                copy.set(index, next);
-                copy.set(index + 1, current);
+        T extremum = value.get(0);
+        for (int index = 1; index < value.size() - 1; index++) {
+            T current = value.get(index);
+            if (comparator.compare(current, extremum) > 0) {
+                extremum = current;
             }
         }
-        return copy.get(value.size() - 1);
+        return extremum;
     }
 
     public static void main(String[] args) {
