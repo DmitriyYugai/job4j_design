@@ -11,13 +11,11 @@ import java.util.Map;
 
 public class SimpleCache {
     private Map<String, SoftReference> cache;
-    private SoftReference<List<String>> names;
-    private SoftReference<List<String>> addresses;
 
     public SimpleCache() {
         cache = new HashMap<>();
-        cache.put("Names.txt", names);
-        cache.put("Addresses.txt", addresses);
+        cache.put("Names.txt", null);
+        cache.put("Addresses.txt", null);
     }
 
     public List<String> get(String key) throws IOException {
@@ -33,6 +31,7 @@ public class SimpleCache {
                 }
                 softRef = new SoftReference<>(fileContent);
                 cache.put(key, softRef);
+                return fileContent;
             }
         }
         return softRef.get();
@@ -41,6 +40,8 @@ public class SimpleCache {
     public static void main(String[] args) throws Exception {
         SimpleCache simpleCache = new SimpleCache();
         System.out.println(simpleCache.get("Names.txt"));
+        System.out.println(simpleCache.get("Names.txt"));
+        System.out.println(simpleCache.get("Adresses.txt"));
         System.out.println(simpleCache.get("Adresses.txt"));
     }
 }
