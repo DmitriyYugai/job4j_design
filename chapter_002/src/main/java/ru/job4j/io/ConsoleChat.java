@@ -31,13 +31,6 @@ public class ConsoleChat {
         while (!(input = scanner.nextLine()).equals(OUT)) {
             logList.add("Пользователь: " + input);
             stopFlag = getDispatch(input, stopFlag);
-//            if (input.equals(STOP)) {
-//                stopFlag = true;
-//                continue;
-//            }
-//            if (input.equals(CONTINUE)) {
-//                stopFlag = false;
-//            }
             if (!stopFlag) {
                 String answer = getBotAnswer();
                 logList.add("Бот: " + answer);
