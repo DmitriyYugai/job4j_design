@@ -2,9 +2,7 @@ package ru.job4j.design.lsp;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 
@@ -19,6 +17,24 @@ public class ControllQuality {
     public void distribute(Food food) {
         Optional<Store> store = getStore(food);
         store.ifPresent(value -> value.add(food));
+    }
+
+    public void resort() {
+        List<Food> list = getAll();
+        for (Food food : list) {
+            distribute(food);
+        }
+    }
+
+    private List<Food> getAll() {
+        List<Food> rsl = new ArrayList<>();
+        for (var key : dispatch.keySet()) {
+            Store store = dispatch.get(key);
+            List<Food> products = store.getAll();
+            rsl.addAll(products);
+            products.clear();
+        }
+        return rsl;
     }
 
     private Optional<Store> getStore(Food food) {

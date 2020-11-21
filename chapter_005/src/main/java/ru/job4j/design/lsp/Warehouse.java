@@ -10,4 +10,9 @@ public class Warehouse implements Store {
     public void add(Food food) {
         products.add(food);
     }
+
+    @Override
+    public List<Food> getAll() {
+        return products;
+    }
 }

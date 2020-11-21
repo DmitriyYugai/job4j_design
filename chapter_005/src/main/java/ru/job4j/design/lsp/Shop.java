@@ -17,4 +17,9 @@ public class Shop implements Store {
         }
         products.add(food);
     }
+
+    @Override
+    public List<Food> getAll() {
+        return products;
+    }
 }
