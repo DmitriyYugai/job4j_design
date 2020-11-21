@@ -1,11 +1,10 @@
 package ru.job4j.design.lsp.parking;
 
 public interface ParkingService {
-    int getTotalCarPlaces();
 
-    int getTotalTrackPlaces();
+    void addCar(Car car);
 
-    int getFreeCarPlaces();
+    void addTrack(Track track);
 
-    int getFreeTrackPlaces();
+    void addTrackToCarPlace(Track track, int carPlaces);
 }

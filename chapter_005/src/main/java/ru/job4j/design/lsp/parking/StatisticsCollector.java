@@ -1,9 +1,11 @@
 package ru.job4j.design.lsp.parking;
 
 public interface StatisticsCollector {
-    void addCar(Car car);
+    int getTotalCarPlaces();
 
-    void addTrack(Track track);
+    int getTotalTrackPlaces();
 
-    void addTrackToCarPlace(Track track);
+    int getBusyCarPlaces();
+
+    int getBusyTrackPlaces();
 }
