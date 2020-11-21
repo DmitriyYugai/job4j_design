@@ -35,6 +35,6 @@ public class ParkingServiceTest {
         StatisticsCollector collector = new StatisticsCollectorImpl(parking);
         ps.addTrackToCarPlace(new Track(), 3);
         ps.addTrackToCarPlace(new Track(), 2);
-        assertThat(collector.getBusyTrackPlaces(), is(5));
+        assertThat(collector.getBusyCarPlaces(), is(5));
     }
 }

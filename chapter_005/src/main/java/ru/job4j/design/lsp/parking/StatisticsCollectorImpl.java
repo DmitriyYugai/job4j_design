@@ -9,21 +9,21 @@ public class StatisticsCollectorImpl implements StatisticsCollector {
 
     @Override
     public int getTotalCarPlaces() {
-        return 0;
+        return parking.getCars().length;
     }
 
     @Override
     public int getTotalTrackPlaces() {
-        return 0;
+        return parking.getTracks().length;
     }
 
     @Override
     public int getBusyCarPlaces() {
-        return 0;
+        return parking.getCarIndex();
     }
 
     @Override
     public int getBusyTrackPlaces() {
-        return 0;
+        return parking.getTrackIndex();
     }
 }
