@@ -1,0 +1,35 @@
+package ru.job4j.concurrent;
+
+public class ConsoleProgress implements Runnable {
+    private String[] process;
+
+    public ConsoleProgress() {
+        process = new String[3];
+        process[0] = "\\";
+        process[1] = "|";
+        process[2] = "/";
+    }
+
+    @Override
+    public void run() {
+        int index = 0;
+        while (!Thread.currentThread().isInterrupted()) {
+            System.out.print("\r load: " + process[index++]);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (index == 3) {
+                index = 0;
+            }
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        Thread progress = new Thread(new ConsoleProgress());
+        progress.start();
+        Thread.sleep(5000);
+        progress.interrupt();
+    }
+}
