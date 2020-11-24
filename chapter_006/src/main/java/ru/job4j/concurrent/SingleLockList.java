@@ -25,10 +25,10 @@ public class SingleLockList<T> implements Iterable<T> {
     }
 
     private SimpleArray<T> copy(SimpleArray<T> array) {
-        SimpleArray<T> arrayCopy = new SimpleArray<>();
+        SimpleArray<T> copy = new SimpleArray<>();
         for (T element : array) {
-            arrayCopy.add(element);
+            copy.add(element);
         }
-        return arrayCopy;
+        return copy;
     }
 }
