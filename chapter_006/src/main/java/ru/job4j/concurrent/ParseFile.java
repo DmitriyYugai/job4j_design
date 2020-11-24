@@ -3,14 +3,10 @@ package ru.job4j.concurrent;
 import java.io.*;
 
 public class ParseFile {
-    private File file;
+    private final File file;
 
-    public synchronized void setFile(File f) {
-        file = f;
-    }
-
-    public synchronized File getFile() {
-        return file;
+    public ParseFile(File file) {
+        this.file = file;
     }
 
     public synchronized String getContent() throws IOException {
