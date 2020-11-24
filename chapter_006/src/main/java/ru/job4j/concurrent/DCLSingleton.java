@@ -1,11 +1,11 @@
 package ru.job4j.concurrent;
 
 public class DCLSingleton {
-    private volatile static DCLSingleton inst;
+    private static DCLSingleton inst;
 
     private DCLSingleton() { }
 
-    public static DCLSingleton instOf() {
+    public static synchronized DCLSingleton instOf() {
         if (inst == null) {
             inst = new DCLSingleton();
         }
