@@ -1,22 +1,23 @@
 package ru.job4j.concurrent;
 
-public class Node<T> {
-    private Node next;
-    private T value;
+import net.jcip.annotations.Immutable;
 
-    public Node getNext() {
-        return next;
+@Immutable
+public class Node<T> {
+    private final Node<T> next;
+    private final T value;
+
+    public Node(Node<T> next, T value) {
+        this.next = next;
+        this.value = value;
     }
 
-    public void setNext(Node next) {
-        throw new UnsupportedOperationException("Object is immutable");
+    public Node<T> getNext() {
+        return next;
     }
 
     public T getValue() {
         return value;
     }
 
-    public void setValue(T value) {
-        throw new UnsupportedOperationException("Object is immutable");
-    }
 }
