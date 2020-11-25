@@ -2,7 +2,7 @@ package ru.job4j.concurrent;
 
 public class ParallelSearch {
     public static void main(String[] args) throws Exception {
-        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>();
+        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(5);
         final Thread consumer = new Thread(
                 () -> {
                     while (!queue.isEmpty() || !Thread.currentThread().isInterrupted()) {

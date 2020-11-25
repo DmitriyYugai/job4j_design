@@ -10,10 +10,7 @@ import java.util.Queue;
 public class SimpleBlockingQueue<T> {
     @GuardedBy("this")
     private final Queue<T> queue = new LinkedList<>();
-    private int maxSize = 10;
-
-    public SimpleBlockingQueue() {
-    }
+    private int maxSize;
 
     public SimpleBlockingQueue(int maxSize) {
         this.maxSize = maxSize;

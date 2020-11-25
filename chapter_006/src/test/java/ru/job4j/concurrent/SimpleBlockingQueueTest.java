@@ -27,7 +27,7 @@ public class SimpleBlockingQueueTest {
 
     @Test
     public void whenOnlyGet() throws InterruptedException {
-        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>();
+        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(5);
         Thread consumer = new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
                 try {
@@ -47,7 +47,7 @@ public class SimpleBlockingQueueTest {
     @Test
     public void whenFetchAllThenGetIt() throws InterruptedException {
         final CopyOnWriteArrayList<Integer> buffer = new CopyOnWriteArrayList<>();
-        final SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>();
+        final SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(5);
         Thread producer = new Thread(
                 () -> {
                     IntStream.range(0, 5).forEach(
