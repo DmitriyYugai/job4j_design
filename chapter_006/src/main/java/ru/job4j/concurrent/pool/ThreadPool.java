@@ -1,4 +1,6 @@
-package ru.job4j.concurrent;
+package ru.job4j.concurrent.pool;
+
+import ru.job4j.concurrent.SimpleBlockingQueue;
 
 import java.util.LinkedList;
 import java.util.List;
