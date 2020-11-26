@@ -17,7 +17,8 @@ public class EmailNotification {
 
     public synchronized void emailTo(User user) {
         executor.execute(() -> {
-            String subject = String.format("Notification %s to email %s", user.getName(), user.getEmail());
+            String subject = String.format(
+                    "Notification %s to email %s", user.getName(), user.getEmail());
             String body = String.format("Add a new event to %s", user.getName());
             send(subject, body, user.getEmail());
         });
@@ -33,7 +34,8 @@ public class EmailNotification {
 
     public static void main(String[] args) {
         EmailNotification notification = new EmailNotification(
-                Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()));
+                Executors.newFixedThreadPool(
+                        Runtime.getRuntime().availableProcessors()));
         notification.emailTo(new User("Dmitry", "student@mail.ru"));
         notification.close();
     }
