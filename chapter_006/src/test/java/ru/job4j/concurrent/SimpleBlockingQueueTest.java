@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class SimpleBlockingQueueTest {
     @Test
-    public void whenOnlyOffer() throws InterruptedException {
+    public void whenOnlyOffer() {
         SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(1);
         Thread producer = new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
@@ -19,14 +19,16 @@ public class SimpleBlockingQueueTest {
             }
         });
         producer.start();
-        Thread.sleep(100);
+        while (producer.getState() == Thread.State.RUNNABLE) {
+            continue;
+        }
         Thread.State rsl = producer.getState();
         producer.interrupt();
         assertThat(rsl, is(Thread.State.WAITING));
     }
 
     @Test
-    public void whenOnlyGet() throws InterruptedException {
+    public void whenOnlyGet() {
         SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(5);
         Thread consumer = new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
@@ -38,7 +40,9 @@ public class SimpleBlockingQueueTest {
             }
         });
         consumer.start();
-        Thread.sleep(100);
+        while (consumer.getState() == Thread.State.RUNNABLE) {
+            continue;
+        }
         Thread.State rsl = consumer.getState();
         consumer.interrupt();
         assertThat(rsl, is(Thread.State.WAITING));
