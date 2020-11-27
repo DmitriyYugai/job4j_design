@@ -3,3 +3,5 @@
 [![codecov](https://codecov.io/gh/DmitriyYugai/job4j_design/branch/master/graph/badge.svg?token=JR1UW0L37O)](https://codecov.io/gh/DmitriyYugai/job4j_design)
 
 Работа с ветками Git через IDEA.
+Вношу изменения в файл README
+Добавляю изменения в последний коммит.
