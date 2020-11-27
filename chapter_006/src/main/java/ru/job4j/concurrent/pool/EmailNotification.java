@@ -8,14 +8,13 @@ import java.util.concurrent.Executors;
 
 @ThreadSafe
 public class EmailNotification {
-    @GuardedBy("this")
     private final ExecutorService executor;
 
     public EmailNotification(ExecutorService executor) {
         this.executor = executor;
     }
 
-    public synchronized void emailTo(User user) {
+    public void emailTo(User user) {
         executor.execute(() -> {
             String subject = String.format(
                     "Notification %s to email %s", user.getName(), user.getEmail());
@@ -24,7 +23,7 @@ public class EmailNotification {
         });
     }
 
-    public synchronized void close() {
+    public void close() {
         executor.shutdown();
     }
 
