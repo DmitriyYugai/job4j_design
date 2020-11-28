@@ -17,3 +17,5 @@
 Работа над новой задачей после git stash
 
 Изменение для recursive merge из ветки task_411998
+
+Изменение для recursuve merge из ветки task_411998 в файле README
