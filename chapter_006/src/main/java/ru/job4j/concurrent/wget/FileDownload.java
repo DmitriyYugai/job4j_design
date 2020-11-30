@@ -9,7 +9,7 @@ import java.net.URL;
 
 public class FileDownload implements Runnable {
     private static final Logger LOGGER = LoggerFactory.getLogger(FileDownload.class.getName());
-    private ParseArg parser;
+    private final ParseArg parser;
 
     public FileDownload(ParseArg parser) {
         this.parser = parser;

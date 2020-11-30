@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParseArg {
-    private List<String> list;
+    private final List<String> list;
 
     public ParseArg(String[] args) {
         list = new ArrayList<>();
