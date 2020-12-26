@@ -29,15 +29,15 @@ java -jar zip.jar -d C:\project -e txt -o C:\project.zip
 -o - output - расположение конечного архива<br>
 Проект построен на основе трёх классов: ArgZip, Zip, ZipVisitor. Общая диаграмма зависимости классов:<br><br>
 ![Diagram](img/zip/about_zip/dep.PNG)<br><br>
-1. Класс ArgZip:<br><br>
+1. Класс __*ArgZip*__:<br><br>
 ![ArgZip_API](img/zip/about_zip/ArgZip_api.PNG)<br><br>
 Предназначен для работы с входными аргументами - осуществляет валидацию входных параметров, 
 а также извлекает значения соответствующих ключей.<br><br>
-2. Класс Zip:<br><br>
+2. Класс __*Zip*__:<br><br>
 ![Zip_API](img/zip/about_zip/Zip_api.PNG)<br><br>
 Это главный класс - обходит файловую систему, исключая не нужные файлы, 
 а также осуществляет упаковку.<br><br>
-3. Класс ZipVisitor:<br><br>
+3. Класс __*ZipVisitor*__:<br><br>
 ![ZipVisitor_API](img/zip/about_zip/ZipVisitor_api.PNG)<br><br>
 Представляет собой вспомогательный класс для обхода файловой системы.
 ### <a name="build_zip"></a> Сборка
@@ -98,15 +98,15 @@ java -jar find.jar -d C:\projects -n file_name (-f or -m or -r) -o C:\projects\o
 -m - искать по маске, либо -f - полное совпадение имени, либо -r - регулярное выражение.<br><br>
 Проект построен на основе трёх классов: ArgFind, Find, FindVisitorFull. Общая диаграмма зависимости классов:<br><br>
 ![Diagram](img/find/about_find/dep.PNG)<br><br>
-1. Класс ArgFind:<br><br>
+1. Класс __*ArgFind*__:<br><br>
 ![ArgFind_API](img/find/about_find/ArgFind_api.PNG)<br><br>
 Предназначен для работы с входными аргументами - осуществляет валидацию входных параметров, 
 извлекает значения соответствующих ключей и режим работы утилиты.<br><br>
-2. Класс Find:<br><br>
+2. Класс __*Find*__:<br><br>
 ![Find_API](img/find/about_find/Find_api.PNG)<br><br>
 Это главный класс - ищет указанные файлы в указанной папке (в зависимости от режима работы утилиты по предикату), формирует список из найденных файлов
  и записывает этот список в выходной файл. <br><br>
-3. Класс FindVisitorFull:<br><br>
+3. Класс __*FindVisitorFull*__:<br><br>
 ![FindVisitorFull_API](img/find/about_find/FindVisitorFull_api.PNG)<br><br>
 Представляет собой вспомогательный класс для обхода файловой системы.
 ### <a name="build_find"></a> Сборка
