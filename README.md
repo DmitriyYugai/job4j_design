@@ -143,5 +143,5 @@ java -jar find.jar -d C:\projects -n file_name (-f or -m or -r) -o C:\projects\o
 ![Поиск 4](img/find/usage_find/java3.PNG)<br><br>
 Как видно, программа успешно отработала и создала выходной файл со всеми искомыми файлами.
 ### Контакты
-Почта: studentnstu97@mail.ru<br>
+Почта: dmitry_yugay@mail.ru<br>
 Skype: live:.cid.9cdc925fb48220b4
